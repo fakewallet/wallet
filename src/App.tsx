@@ -7,29 +7,27 @@ import { useState } from 'react';
 
 export default function App() {
   const [selected, SELECTED] = useState(0);
+  const [accounts, ACCOUNTS] = useState([
+    { address: '0x3991aCBBD3E6bf973295e1FAad070De97289b4C0', name: 'my account 0', label: 'red' },
+    { address: '0x3991aCBBD3E6bf973295e1FAad070De97289b4C1', name: 'my account 1', label: 'green' },
+    { address: '0x3991aCBBD3E6bf973295e1FAad070De97289b4C2', name: 'my account 2', label: 'green' },
+    { address: '0x3991aCBBD3E6bf973295e1FAad070De97289b4C3', name: 'my account 3', label: 'green' },
+    { address: '0x3991aCBBD3E6bf973295e1FAad070De97289b4C4', name: 'my account 4', label: 'green' },
+    { address: '0x3991aCBBD3E6bf973295e1FAad070De97289b4C5', name: 'my account 5', label: 'green' },
+    { address: '0x3991aCBBD3E6bf973295e1FAad070De97289b4C6', name: 'my account 6', label: 'green' },
+    { address: '0x3991aCBBD3E6bf973295e1FAad070De97289b4C7', name: 'my account 7', label: 'green' },
+    { address: '0x3991aCBBD3E6bf973295e1FAad070De97289b4C8', name: 'my account 8', label: 'green' },
+    { address: '0x3991aCBBD3E6bf973295e1FAad070De97289b4C9', name: 'my account 9', label: 'green' },
+    { address: '0x3991aCBBD3E6bf973295e1FAad070De97289b4CA', name: 'my account a', label: 'green' },
+    { address: '0x3991aCBBD3E6bf973295e1FAad070De97289b4CB', name: 'my account b', label: 'green' },
+  ]);
   const [maindata, MAINDATA] = useState([
     {
       render: Home,
-      data: {
-        accounts: [
-          { address: '0x3991aCBBD3E6bf973295e1FAad070De97289b4CA', name: 'my account 1', label: 'red' },
-          { address: '0x3991aCBBD3E6bf973295e1FAad070De97289b4CA', name: 'my account 2', label: 'green' },
-          { address: '0x3991aCBBD3E6bf973295e1FAad070De97289b4CA', name: 'my account 2', label: 'green' },
-          { address: '0x3991aCBBD3E6bf973295e1FAad070De97289b4CA', name: 'my account 2', label: 'green' },
-          { address: '0x3991aCBBD3E6bf973295e1FAad070De97289b4CA', name: 'my account 2', label: 'green' },
-          { address: '0x3991aCBBD3E6bf973295e1FAad070De97289b4CA', name: 'my account 2', label: 'green' },
-          { address: '0x3991aCBBD3E6bf973295e1FAad070De97289b4CA', name: 'my account 2', label: 'green' },
-          { address: '0x3991aCBBD3E6bf973295e1FAad070De97289b4CA', name: 'my account 2', label: 'green' },
-          { address: '0x3991aCBBD3E6bf973295e1FAad070De97289b4CA', name: 'my account 2', label: 'green' },
-          { address: '0x3991aCBBD3E6bf973295e1FAad070De97289b4CA', name: 'my account 2', label: 'green' },
-          { address: '0x3991aCBBD3E6bf973295e1FAad070De97289b4CA', name: 'my account 2', label: 'green' },
-          { address: '0x3991aCBBD3E6bf973295e1FAad070De97289b4CA', name: 'my account 2', label: 'green' },
-        ]
-      },
+      data: {},
     },
   ]);
   console.log(MAINDATA)
-  // const [accounts, ACCOUNTS] = useState([]);
   return <>
     <Box display='flex' justifyContent='center'>
       <Tabs
@@ -51,6 +49,6 @@ export default function App() {
         }
       </Tabs>
     </Box>
-    {maindata[selected].render(maindata[selected].data)}
+    {maindata[selected].render({ accounts, ACCOUNTS, selected, SELECTED })}
   </>;
 }
