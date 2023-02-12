@@ -7,7 +7,27 @@ import { useState } from 'react';
 
 export default function App() {
   const [selected, SELECTED] = useState(0);
-  const [maindata, MAINDATA] = useState([{ render: Home }, { render: Home }]);
+  const [maindata, MAINDATA] = useState([
+    {
+      render: Home,
+      data: {
+        accounts: [
+          { address: '0x3991aCBBD3E6bf973295e1FAad070De97289b4CA', name: 'my account 1', label: 'red' },
+          { address: '0x3991aCBBD3E6bf973295e1FAad070De97289b4CA', name: 'my account 2', label: 'green' },
+          { address: '0x3991aCBBD3E6bf973295e1FAad070De97289b4CA', name: 'my account 2', label: 'green' },
+          { address: '0x3991aCBBD3E6bf973295e1FAad070De97289b4CA', name: 'my account 2', label: 'green' },
+          { address: '0x3991aCBBD3E6bf973295e1FAad070De97289b4CA', name: 'my account 2', label: 'green' },
+          { address: '0x3991aCBBD3E6bf973295e1FAad070De97289b4CA', name: 'my account 2', label: 'green' },
+          { address: '0x3991aCBBD3E6bf973295e1FAad070De97289b4CA', name: 'my account 2', label: 'green' },
+          { address: '0x3991aCBBD3E6bf973295e1FAad070De97289b4CA', name: 'my account 2', label: 'green' },
+          { address: '0x3991aCBBD3E6bf973295e1FAad070De97289b4CA', name: 'my account 2', label: 'green' },
+          { address: '0x3991aCBBD3E6bf973295e1FAad070De97289b4CA', name: 'my account 2', label: 'green' },
+          { address: '0x3991aCBBD3E6bf973295e1FAad070De97289b4CA', name: 'my account 2', label: 'green' },
+          { address: '0x3991aCBBD3E6bf973295e1FAad070De97289b4CA', name: 'my account 2', label: 'green' },
+        ]
+      },
+    },
+  ]);
   console.log(MAINDATA)
   // const [accounts, ACCOUNTS] = useState([]);
   return <>
@@ -20,7 +40,7 @@ export default function App() {
         allowScrollButtonsMobile
       >
         {
-          maindata.map(({ render }: { render: () => JSX.Element; }, index: number) => {
+          maindata.map(({ render }, index) => {
             switch (render) {
               case Home:
                 return <Tab icon={<HomeIcon />} key={index} />;
@@ -31,6 +51,6 @@ export default function App() {
         }
       </Tabs>
     </Box>
-    {maindata[selected].render()}
+    {maindata[selected].render(maindata[selected].data)}
   </>;
 }
