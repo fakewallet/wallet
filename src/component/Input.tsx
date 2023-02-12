@@ -5,7 +5,7 @@ import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import options from '../dev/options';
 
-export default function Main() {
+export default function Input() {
     const [value, VALUE] = useState<string>('');
     return <Box display='flex' alignItems='center'>
         <Box m={1} flexGrow={1}>
@@ -21,7 +21,7 @@ export default function Main() {
             />
         </Box>
         <Box m={1}>
-            <Button variant='outlined'>send</Button>
+            <Button variant='outlined'>confirm</Button>
         </Box>
     </Box>;
 }
