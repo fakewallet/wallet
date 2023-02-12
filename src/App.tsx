@@ -1,15 +1,36 @@
 import Box from '@mui/material/Box';
-import Grid from '@mui/material/Grid';
-import Main from './component/Main';
+import Tabs from '@mui/material/Tabs';
+import Tab from '@mui/material/Tab';
+import HomeIcon from '@mui/icons-material/Home';
+import Home from './page/Home';
+import { useState } from 'react';
 
-function App() {
-  return <Grid container justifyContent='center'>
-    <Grid item xs={12} sm={11} md={10} lg={9} xl={8} display='flex' alignItems='center' height='100vh' p={1}>
-      <Box height='98%' width='100%'>
-        <Main />
-      </Box>
-    </Grid>
-  </Grid>;
+export default function App() {
+  const [selected, SELECTED] = useState(0);
+  const [maindata, MAINDATA] = useState([{ render: Home }, { render: Home }]);
+  console.log(MAINDATA)
+  // const [accounts, ACCOUNTS] = useState([]);
+  return <>
+    <Box display='flex' justifyContent='center'>
+      <Tabs
+        value={selected}
+        onChange={(...[, value]) => SELECTED(value)}
+        variant="scrollable"
+        scrollButtons
+        allowScrollButtonsMobile
+      >
+        {
+          maindata.map(({ render }: { render: () => JSX.Element; }, index: number) => {
+            switch (render) {
+              case Home:
+                return <Tab icon={<HomeIcon />} key={index} />;
+              default:
+                throw new Error('error maindata type');
+            }
+          })
+        }
+      </Tabs>
+    </Box>
+    {maindata[selected].render()}
+  </>;
 }
-
-export default App;
