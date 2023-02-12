@@ -9,6 +9,7 @@ import ListItem from '@mui/material/ListItem';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import { useState } from 'react';
+import { ethers } from "ethers";
 import AddAccount from '../dialog/AddAccount';
 
 export default function Home(props: any) {
@@ -65,8 +66,13 @@ export default function Home(props: any) {
         <AddAccount
             dialog={addwallet}
             DIALOG={ADDWALLET}
-            callback={(address: string, name: string, label: string) => {
-                console.log(address, name, label);
+            callback={(addr: string, name: string, label: string) => {
+                try {
+                    const address = ethers.getAddress(addr.toLowerCase());
+                    ACCOUNTS([...accounts, { address, name, label }]);
+                } catch (e) {
+                    alert(`FAILED TO LOAD ACCOUNT: ${e}`);
+                }
             }}
         />
     </>;
