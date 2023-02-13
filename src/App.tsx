@@ -1,9 +1,9 @@
-import Box from '@mui/material/Box';
-import Tabs from '@mui/material/Tabs';
-import Tab from '@mui/material/Tab';
-import HomeIcon from '@mui/icons-material/Home';
-import Home from './page/Home';
-import { useState } from 'react';
+import { Box, Tabs, Tab } from '@mui/material';
+import { Home } from '@mui/icons-material';
+import { useEffect, useState } from 'react';
+import { Core } from "@walletconnect/core";
+import Client, { Web3Wallet } from "@walletconnect/web3wallet";
+import Main from './page/Main';
 
 export default function App() {
   const [selected, SELECTED] = useState(0);
@@ -23,11 +23,38 @@ export default function App() {
   ]);
   const [maindata, MAINDATA] = useState([
     {
-      render: Home,
+      render: Main,
+      data: {},
+    },
+    {
+      render: Main,
+      data: {},
+    },
+    {
+      render: Main,
       data: {},
     },
   ]);
-  console.log(MAINDATA)
+  const [web3wallet, WEB3WALLET] = useState<Client | undefined>(undefined);
+  useEffect(
+    () => {
+      Web3Wallet.init({
+        core: new Core({
+          projectId: process.env.REACT_APP_WALLETCONNECT_PROJECT_ID,
+        }),
+        metadata: {
+          name: "FakeWallet",
+          description: "TODO",
+          url: "www.walletconnect.com",
+          icons: [],
+        },
+      }).then((val) => {
+        WEB3WALLET(val);
+      });
+    },
+    [],
+  );
+  console.log(MAINDATA, web3wallet);
   return <>
     <Box display='flex' justifyContent='center'>
       <Tabs
@@ -40,8 +67,8 @@ export default function App() {
         {
           maindata.map(({ render }, index) => {
             switch (render) {
-              case Home:
-                return <Tab icon={<HomeIcon />} key={index} />;
+              case Main:
+                return <Tab icon={<Home />} key={index} />;
               default:
                 throw new Error('error maindata type');
             }

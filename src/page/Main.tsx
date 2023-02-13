@@ -1,18 +1,10 @@
-import Box from '@mui/material/Box';
-import IconButton from '@mui/material/IconButton';
-import DeleteIcon from '@mui/icons-material/Delete';
-import AddIcon from '@mui/icons-material/Add';
-import WalletIcon from '@mui/icons-material/Wallet';
-import ContentCopyIcon from '@mui/icons-material/ContentCopy';
-import List from '@mui/material/List';
-import ListItem from '@mui/material/ListItem';
-import ListItemIcon from '@mui/material/ListItemIcon';
-import ListItemText from '@mui/material/ListItemText';
+import { Box, IconButton, List, ListItem, ListItemIcon, ListItemText } from '@mui/material';
+import { Delete, Add, Wallet, ContentCopy } from '@mui/icons-material';
 import { useState } from 'react';
 import { ethers } from "ethers";
 import AddAccount from '../dialog/AddAccount';
 
-export default function Home(props: any) {
+export default function Main(props: any) {
     const { accounts, ACCOUNTS }: { accounts: { address: string; name: string; label: string }[], ACCOUNTS: (value: any) => void } = props;
     const [addwallet, ADDWALLET] = useState(false);
     return <>
@@ -26,13 +18,13 @@ export default function Home(props: any) {
                                     ADDWALLET(true);
                                 }}
                             >
-                                <AddIcon />
+                                <Add />
                             </IconButton>
                         </>
                     }
                 >
                     <ListItemIcon>
-                        <WalletIcon />
+                        <Wallet />
                     </ListItemIcon>
                 </ListItem>
                 {
@@ -47,14 +39,14 @@ export default function Home(props: any) {
                                         navigator.clipboard.writeText(address);
                                     }}
                                 >
-                                    <ContentCopyIcon />
+                                    <ContentCopy />
                                 </IconButton>
                                 <IconButton
                                     onClick={() => {
                                         ACCOUNTS(accounts.filter((...[, i]) => i !== index));
                                     }}
                                 >
-                                    <DeleteIcon />
+                                    <Delete />
                                 </IconButton>
                             </>
                         }>
